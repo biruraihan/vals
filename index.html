@@ -58,7 +58,6 @@
             z-index: 999;
         }
 
-        /* Falling Hearts */
         .heart {
             position: fixed;
             top: -10px;
@@ -71,11 +70,10 @@
         @keyframes fall { to { transform: translateY(110vh); } }
         img { border-radius: 15px; width: 100%; max-width: 200px; }
 
-        /* The Music Trigger Overlay */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 239, 242, 0.95);
+            background: #ffeff2;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -83,18 +81,17 @@
             z-index: 2000;
             cursor: pointer;
         }
-        #overlay h2 { color: #ff4d6d; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
     <div id="overlay" onclick="initPage()">
-        <h2>❤️ For Kayrana ❤️</h2>
+        <h2 style="color: #ff4d6d;">❤️ For Kayrana ❤️</h2>
         <button style="background: #ff4d6d; color: white;">Click to Open</button>
     </div>
 
     <audio id="romanticSong" loop>
-        <source src="https://ia800905.us.archive.org/21/items/tvtunes_21644/Barry%20Manilow%20-%20Can%27t%20Smile%20Without%20You.mp3" type="audio/mpeg">
+        <source src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=Barry+Manilow+-+Can%27t+Smile+Without+You&filename=mz/mzmzgyotezgyodm5_uS88XmAn36o.MP3" type="audio/mpeg">
     </audio>
 
     <div id="container">
@@ -114,9 +111,10 @@
         const overlay = document.getElementById('overlay');
         let yesSize = 1;
 
-        // Start music and hide overlay
         function initPage() {
-            song.play();
+            // Volume set to max
+            song.volume = 1.0;
+            song.play().catch(e => console.error("Playback failed", e));
             overlay.style.display = 'none';
             positionNoButton();
         }
@@ -128,6 +126,8 @@
         }
 
         function moveButton() {
+            // Backup play command
+            song.play().catch(()=>{});
             const padding = 50;
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
