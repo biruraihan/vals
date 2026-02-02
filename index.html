@@ -58,22 +58,43 @@
             z-index: 999;
         }
 
+        /* Falling Hearts */
         .heart {
             position: fixed;
             top: -10px;
             color: #ff4d6d;
             font-size: 20px;
             animation: fall linear forwards;
+            z-index: 1;
         }
 
         @keyframes fall { to { transform: translateY(110vh); } }
         img { border-radius: 15px; width: 100%; max-width: 200px; }
+
+        /* The Music Trigger Overlay */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 239, 242, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            cursor: pointer;
+        }
+        #overlay h2 { color: #ff4d6d; margin-bottom: 20px; }
     </style>
 </head>
-<body onclick="startMusic()" onmousemove="startMusic()" ontouchstart="startMusic()">
+<body>
+
+    <div id="overlay" onclick="initPage()">
+        <h2>❤️ For Kayrana ❤️</h2>
+        <button style="background: #ff4d6d; color: white;">Click to Open</button>
+    </div>
 
     <audio id="romanticSong" loop>
-        <source src="https://www.mboxdrive.com/Barry%20Manilow%20-%20Can't%20Smile%20Without%20You%20(Official%20Audio).mp3" type="audio/mpeg">
+        <source src="https://ia800905.us.archive.org/21/items/tvtunes_21644/Barry%20Manilow%20-%20Can%27t%20Smile%20Without%20You.mp3" type="audio/mpeg">
     </audio>
 
     <div id="container">
@@ -90,25 +111,23 @@
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const song = document.getElementById('romanticSong');
+        const overlay = document.getElementById('overlay');
         let yesSize = 1;
-        let musicStarted = false;
 
-        // Position "No" button next to "Yes" at the start
-        window.onload = () => {
+        // Start music and hide overlay
+        function initPage() {
+            song.play();
+            overlay.style.display = 'none';
+            positionNoButton();
+        }
+
+        function positionNoButton() {
             const rect = yesBtn.getBoundingClientRect();
             noBtn.style.left = (rect.right + 20) + "px";
             noBtn.style.top = rect.top + "px";
-        };
-
-        function startMusic() {
-            if (!musicStarted) {
-                song.play().catch(() => {});
-                musicStarted = true;
-            }
         }
 
         function moveButton() {
-            startMusic();
             const padding = 50;
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
@@ -132,7 +151,6 @@
         setInterval(createHeart, 300);
 
         function celebrate() {
-            startMusic();
             document.querySelector('h1').innerText = "Opening your surprise... 🥰";
             setTimeout(() => {
                 window.location.href = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?usp=sharing";
