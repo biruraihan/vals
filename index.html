@@ -15,6 +15,7 @@
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background-color: #ffeff2;
             overflow: hidden;
+            text-align: center;
         }
 
         #container {
@@ -25,17 +26,17 @@
             box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
             width: 85%;
             max-width: 400px;
-            text-align: center;
+            position: relative;
         }
 
-        h1 { color: #ff4d6d; font-size: 1.8rem; }
+        h1 { color: #ff4d6d; font-size: 1.8rem; margin-bottom: 15px; }
 
         .buttons {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-            margin-top: 20px;
+            margin-top: 25px;
             height: 60px;
         }
 
@@ -68,35 +69,22 @@
         }
 
         @keyframes fall { to { transform: translateY(110vh); } }
-        img { border-radius: 15px; width: 100%; max-width: 200px; }
-
-        #overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffeff2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            cursor: pointer;
+        
+        /* Stylized Image for King Nassar */
+        img { 
+            border-radius: 20px; 
+            width: 100%; 
+            max-width: 250px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 
-    <div id="overlay" onclick="initPage()">
-        <h2 style="color: #ff4d6d;">❤️ For Kayrana ❤️</h2>
-        <button style="background: #ff4d6d; color: white;">Click to Open</button>
-    </div>
-
-    <audio id="romanticSong" loop>
-        <source src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=Barry+Manilow+-+Can%27t+Smile+Without+You&filename=mz/mzmzgyotezgyodm5_uS88XmAn36o.MP3" type="audio/mpeg">
-    </audio>
-
     <div id="container">
         <h1>Kayrana, will you be my valentine? ❤️</h1>
-        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3BqZzR3cnR2Z3R4bmV3amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif">
+        
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3V4bmF5ZzZ6em94bmV3amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/m8f9Y3XPi6mSncM65X/giphy.gif" alt="King Nassar Oppa">
         
         <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">Yes!</button>
@@ -107,27 +95,16 @@
     <script>
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const song = document.getElementById('romanticSong');
-        const overlay = document.getElementById('overlay');
         let yesSize = 1;
 
-        function initPage() {
-            // Volume set to max
-            song.volume = 1.0;
-            song.play().catch(e => console.error("Playback failed", e));
-            overlay.style.display = 'none';
-            positionNoButton();
-        }
-
-        function positionNoButton() {
+        // Position "No" button next to "Yes" at the start
+        window.onload = () => {
             const rect = yesBtn.getBoundingClientRect();
             noBtn.style.left = (rect.right + 20) + "px";
             noBtn.style.top = rect.top + "px";
-        }
+        };
 
         function moveButton() {
-            // Backup play command
-            song.play().catch(()=>{});
             const padding = 50;
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
@@ -135,10 +112,12 @@
             noBtn.style.left = x + "px";
             noBtn.style.top = y + "px";
 
-            yesSize += 0.4;
+            // Aggressive growth for Yes button
+            yesSize += 0.45;
             yesBtn.style.transform = `scale(${yesSize})`;
         }
 
+        // Falling Hearts effect
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -151,7 +130,7 @@
         setInterval(createHeart, 300);
 
         function celebrate() {
-            document.querySelector('h1').innerText = "Opening your surprise... 🥰";
+            document.querySelector('h1').innerText = "ASIK! Opening your surprise... 🥰";
             setTimeout(() => {
                 window.location.href = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?usp=sharing";
             }, 1000);
