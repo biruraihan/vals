@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
+    <title>For Kayrana ❤️</title>
     <style>
         body {
             display: flex;
@@ -12,21 +12,23 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #ffdde1;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffeff2;
             overflow: hidden;
             text-align: center;
         }
 
         #container {
             z-index: 10;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            width: 85%;
+            max-width: 450px;
         }
 
-        h1 { color: #ff4d6d; font-size: 2.5rem; }
+        h1 { color: #ff4d6d; font-size: 2rem; margin-bottom: 20px; }
 
         .buttons {
             display: flex;
@@ -34,87 +36,76 @@
             align-items: center;
             gap: 20px;
             margin-top: 30px;
-            min-height: 100px;
+            height: 100px;
+            position: relative;
         }
 
         button {
-            padding: 15px 25px;
+            padding: 15px 35px;
             font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             border: none;
             border-radius: 50px;
-            transition: all 0.2s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.1s ease;
         }
 
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-            z-index: 100;
-        }
-
-        #noBtn {
-            background-color: #808080;
-            color: white;
-            position: absolute;
-        }
+        #yesBtn { background-color: #ff4d6d; color: white; z-index: 100; }
+        #noBtn { background-color: #adb5bd; color: white; position: absolute; }
 
         .heart {
             position: fixed;
             top: -10px;
             color: #ff4d6d;
             font-size: 20px;
-            user-select: none;
             z-index: 1;
             animation: fall linear forwards;
         }
 
-        @keyframes fall {
-            to { transform: translateY(110vh); }
-        }
-
-        #celebration { display: none; }
+        @keyframes fall { to { transform: translateY(110vh); } }
+        
+        img { border-radius: 20px; width: 100%; max-width: 250px; }
     </style>
 </head>
 <body>
 
-    <div id="container">
-        <div id="main-content">
-            <h1 id="question">Will you be my Valentine? ❤️</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyc3JleGZ0amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/c76IJLufpNwSULPk2m/giphy.gif" width="150" alt="Cute bear">
-            
-            <div class="buttons">
-                <button id="yesBtn" onclick="celebrate()">Yes!</button>
-                <button id="noBtn">No</button>
-            </div>
-        </div>
+    <audio id="romanticSong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
-        <div id="celebration">
-            <h1>YAY! I love you! 🥰</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnA4Z3R4bmV3amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" width="250">
+    <div id="container">
+        <h1 id="question">Kayrana, will you be my valentine? ❤️</h1>
+        <img src="https://media.tenor.com/9v6NnIn986AAAAAi/mochi-peach-cat-cute.gif" alt="Cute Cat">
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="celebrate()">Yes!</button>
+            <button id="noBtn">No</button>
         </div>
     </div>
 
     <script>
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        let yesSize = 1.2;
+        const song = document.getElementById('romanticSong');
+        let yesSize = 1;
 
-        // Runaway and Grow logic
-        noBtn.addEventListener('mouseover', () => {
-            // Move "No" button
+        // Replace this with your actual GDrive link
+        const GDRIVE_LINK = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?tab=t.0";
+
+        function moveButton() {
+            song.play(); // Music starts on interaction
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
 
-            // Make "Yes" button bigger
             yesSize += 0.4;
             yesBtn.style.transform = `scale(${yesSize})`;
-        });
+        }
 
-        // Falling hearts effect
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveButton(); });
+
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -127,4 +118,11 @@
         setInterval(createHeart, 300);
 
         function celebrate() {
-            document.getElementById('main
+            document.getElementById('question').innerText = "Redirecting my favorite person... 🥰";
+            setTimeout(() => {
+                window.location.href = GDRIVE_LINK;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
