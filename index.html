@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Question</title>
+    <title>Be My Valentine?</title>
     <style>
         body {
             display: flex;
@@ -11,52 +11,120 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            font-family: 'Arial', sans-serif;
-            background-color: #ffebee;
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffdde1;
             overflow: hidden;
+            text-align: center;
         }
-        h1 { color: #d32f2f; }
-        .buttons { display: flex; gap: 20px; margin-top: 20px; }
+
+        #container {
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 { color: #ff4d6d; font-size: 2.5rem; }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+            min-height: 100px;
+        }
+
         button {
-            padding: 15px 30px;
+            padding: 15px 25px;
             font-size: 1.2rem;
+            font-weight: bold;
             cursor: pointer;
             border: none;
-            border-radius: 10px;
-            transition: 0.3s;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        #yesBtn { background-color: #ff5252; color: white; }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 100;
+        }
+
         #noBtn {
-            background-color: #9e9e9e;
+            background-color: #808080;
             color: white;
             position: absolute;
         }
+
+        .heart {
+            position: fixed;
+            top: -10px;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        #celebration { display: none; }
     </style>
 </head>
 <body>
 
-    <h1 id="question">Will you be my Valentine? ❤️</h1>
-    <div class="buttons">
-        <button id="yesBtn" onclick="celebrate()">Yes!</button>
-        <button id="noBtn">No</button>
+    <div id="container">
+        <div id="main-content">
+            <h1 id="question">Will you be my Valentine? ❤️</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyc3JleGZ0amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/c76IJLufpNwSULPk2m/giphy.gif" width="150" alt="Cute bear">
+            
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">Yes!</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+
+        <div id="celebration">
+            <h1>YAY! I love you! 🥰</h1>
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcnA4Z3R4bmV3amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" width="250">
+        </div>
     </div>
 
     <script>
         const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        let yesSize = 1.2;
 
-        // The "Runaway" logic
+        // Runaway and Grow logic
         noBtn.addEventListener('mouseover', () => {
+            // Move "No" button
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
+
+            // Make "Yes" button bigger
+            yesSize += 0.4;
+            yesBtn.style.transform = `scale(${yesSize})`;
         });
 
-        function celebrate() {
-            document.getElementById('question').innerText = "Yay! See you on the 14th! 🥰";
-            document.querySelector('.buttons').style.display = 'none';
+        // Falling hearts effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
         }
-    </script>
-</body>
-</html>
+        setInterval(createHeart, 300);
+
+        function celebrate() {
+            document.getElementById('main
