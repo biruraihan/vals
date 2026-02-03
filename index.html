@@ -6,43 +6,41 @@
     <title>For Kayrana ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- YOUR SPECIFIC CSS FROM THE VIDEO --- */
         body { background-color: #f0e6f6; font-family: 'Comic Sans MS', cursive, sans-serif; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
         
+        /* --- BIGGER ENVELOPE CSS --- */
         #envelope {
             position: relative;
-            width: 280px;
-            height: 180px;
-            border-bottom-left-radius: 6px;
-            border-bottom-right-radius: 6px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #d9534f; /* Warm romantic red */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 450px; /* Increased size */
+            height: 300px; /* Increased size */
+            background-color: #d9534f;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             cursor: pointer;
+            transition: 0.3s;
         }
 
         .flap {
             position: absolute;
             top: 0;
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-bottom: 82px solid transparent;
-            border-top: 98px solid #d9534f;
+            border-left: 225px solid transparent;
+            border-right: 225px solid transparent;
+            border-bottom: 130px solid transparent;
+            border-top: 160px solid #d9534f;
             transform-origin: top;
-            pointer-events: none;
             z-index: 5;
         }
 
         .pocket {
             position: absolute;
             top: 0;
-            border-left: 140px solid #f5a3a2;
-            border-right: 140px solid #f5a3a2;
-            border-bottom: 90px solid #ff6f61;
-            border-top: 90px solid transparent;
-            border-bottom-left-radius: 6px;
-            border-bottom-right-radius: 6px;
+            border-left: 225px solid #f5a3a2;
+            border-right: 225px solid #f5a3a2;
+            border-bottom: 150px solid #ff6f61;
+            border-top: 150px solid transparent;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
             z-index: 4;
         }
 
@@ -53,34 +51,29 @@
             margin-left: 5%;
             height: 90%;
             top: 5%;
-            border-radius: 6px;
-            box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+            border-radius: 10px;
             font-family: "Dancing Script", cursive;
             z-index: 3;
-            transition: transform 0.6s ease;
+            transition: transform 0.7s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .words { position: absolute; left: 10%; width: 80%; text-align: center; }
-        .words.line2 { top: 30%; font-size: 1.1rem; color: #d9534f; }
-        .words.line3 { top: 50%; font-size: 1.1rem; color: #d9534f; }
+        .words { font-size: 2rem; color: #d9534f; text-align: center; }
 
         /* Animation States */
-        .open .flap { transform: rotateX(180deg); transition: transform 0.4s ease, z-index 0.6s; z-index: 1; }
-        .open .letter { transform: translateY(-100px); transition: transform 0.4s 0.6s ease, z-index 0.6s; z-index: 2; }
+        .open .flap { transform: rotateX(180deg); transition: transform 0.5s ease; z-index: 1; }
+        .open .letter { transform: translateY(-180px); z-index: 2; }
 
-        /* Heart Animations */
-        .hearts { position: absolute; top: 90px; left: 0; right: 0; z-index: 2; opacity: 0; }
-        .open .hearts { opacity: 1; }
-        .heart { position: absolute; bottom: 0; pointer-events: none; }
-        .heart:before, .heart:after { position: absolute; content: ""; left: 25px; top: 0; width: 25px; height: 40px; background: #e60073; border-radius: 25px 25px 0 0; transform: rotate(-45deg); transform-origin: 0 100%; }
-        .heart:after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
-
-        /* Valentine UI (The funny part) */
-        #valentine-ui { display: none; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); width: 85%; max-width: 400px; text-align: center; }
+        /* --- UI ELEMENTS --- */
+        #valentine-ui, #kiss-ui { display: none; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2); width: 85%; max-width: 450px; text-align: center; }
         .buttons { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px; min-height: 100px; position: relative; }
-        button { padding: 12px 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer; border: none; border-radius: 50px; }
-        #yesBtn { background-color: #ff4d6d; color: white; transition: 0.2s; }
+        button { padding: 15px 35px; font-size: 1.2rem; font-weight: bold; cursor: pointer; border: none; border-radius: 50px; }
+        #yesBtn { background-color: #ff4d6d; color: white; }
         #noBtn { background-color: #adb5bd; color: white; }
+        img { width: 100%; border-radius: 15px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -90,33 +83,32 @@
             <div class="flap"></div>
             <div class="pocket"></div>
             <div class="letter">
-                <div class="words line2">For Kayrana</div>
-                <div class="words line3">Click me! ❤️</div>
-            </div>
-            <div class="hearts">
-                <div class="heart" style="left:20%; transform:scale(0.6);"></div>
-                <div class="heart" style="left:50%; transform:scale(1);"></div>
-                <div class="heart" style="left:80%; transform:scale(0.8);"></div>
+                <div class="words">For Kayrana</div>
+                <div class="words" style="font-size: 1.2rem;">Click to see inside...</div>
             </div>
         </div>
     </div>
 
     <div id="valentine-ui">
         <h1 style="color: #ff4d6d;">Kayrana, will you be my valentine? ❤️</h1>
-        <img style="width:100%; border-radius:15px;" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3BqZzR3cnR2Z3R4bmV3amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/ICOgUNoMPvG24/giphy.gif">
+        <img src="https://media.tenor.com/9v6NnIn986AAAAAi/mochi-peach-cat-cute.gif" alt="Cute Valentine">
         <div class="buttons">
-            <button id="yesBtn" onclick="celebrate()">Yes!</button>
+            <button id="yesBtn" onclick="showKiss()">Yes!</button>
             <button id="noBtn" onmouseover="runAway()" onclick="runAway()">No</button>
         </div>
+    </div>
+
+    <div id="kiss-ui">
+        <h1 style="color: #ff4d6d;">I LOVE YOU! 🥰</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIyc3JleGZ0amR5eXN6eHpsbmM0eXN6eHpsbmM0eXN6eHpsbmM0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/G9Sazqy7vsPzcXkLIn/giphy.gif" alt="Kissing Meme">
+        <p>Redirecting to our special docs...</p>
     </div>
 
     <script>
         let yesSize = 1;
 
         function openMe() {
-            const env = document.getElementById('envelope');
-            env.classList.add('open');
-            // Wait for letter to rise before showing question
+            document.getElementById('envelope').classList.add('open');
             setTimeout(() => {
                 document.getElementById('envelope-container').style.display = 'none';
                 document.getElementById('valentine-ui').style.display = 'block';
@@ -132,12 +124,18 @@
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
             
-            yesSize += 0.3;
+            yesSize += 0.4;
             yesBtn.style.transform = `scale(${yesSize})`;
         }
 
-        function celebrate() {
-            window.location.href = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?usp=sharing";
+        function showKiss() {
+            document.getElementById('valentine-ui').style.display = 'none';
+            document.getElementById('kiss-ui').style.display = 'block';
+            
+            // Redirect after showing the kiss for 3 seconds
+            setTimeout(() => {
+                window.location.href = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?usp=sharing";
+            }, 3000);
         }
     </script>
 </body>
