@@ -8,7 +8,7 @@
     <style>
         body { background-color: #f0e6f6; font-family: 'Comic Sans MS', cursive, sans-serif; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
         
-        /* --- ENVELOPE STYLES --- */
+        /* --- THE BIG ENVELOPE --- */
         #envelope { position: relative; width: 550px; height: 380px; background-color: #d9534f; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); cursor: pointer; }
         .flap { position: absolute; top: 0; border-left: 275px solid transparent; border-right: 275px solid transparent; border-bottom: 180px solid transparent; border-top: 200px solid #d9534f; transform-origin: top; z-index: 5; transition: transform 0.8s ease; }
         .pocket { position: absolute; top: 0; border-left: 275px solid #f5a3a2; border-right: 275px solid #f5a3a2; border-bottom: 190px solid #ff6f61; border-top: 190px solid transparent; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 4; }
@@ -24,12 +24,9 @@
         #yesBtn { background-color: #ff4d6d; color: white; }
         #noBtn { background-color: #adb5bd; color: white; }
         
-        /* IMAGE STYLES */
-        .main-img { width: 100%; border-radius: 20px; margin-bottom: 15px; display: block; min-height: 200px; object-fit: cover; }
-        
-        /* BACKUP ANIMATION (If image fails) */
-        .heart-loader { font-size: 100px; color: #ff4d6d; animation: pulse 1s infinite; display: none; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        .main-img { width: 100%; border-radius: 20px; margin-bottom: 15px; display: block; }
+        .heart-backup { font-size: 80px; display: none; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
 </head>
 <body>
@@ -47,8 +44,8 @@
 
     <div id="valentine-ui">
         <h1 style="color: #ff4d6d;">Kayrana, will you be my valentine? ❤️</h1>
-        <img id="gif1" class="main-img" src="https://upload.wikimedia.org/wikipedia/commons/7/70/Emoji_u1f63b.svg" onerror="showBackup(this)">
-        <div id="backup1" class="heart-loader">❤️</div>
+        <img id="gif1" class="main-img" src="https://media.tenor.com/9v6NnIn986AAAAAi/mochi-peach-cat-cute.gif" onerror="handleError(this)">
+        <div class="heart-backup">🥺❤️</div>
         
         <div class="buttons">
             <button id="yesBtn" onclick="showKiss()">Yes!</button>
@@ -57,19 +54,19 @@
     </div>
 
     <div id="kiss-ui">
-        <h1 style="color: #ff4d6d;">I LOVE YOU! 🥰</h1>
-        <img id="gif2" class="main-img" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Heart_coraz%C3%B3n.svg" onerror="showBackup(this)">
-        <div id="backup2" class="heart-loader">💖</div>
-        <p>Redirecting to our special doc...</p>
+        <h1 style="color: #ff4d6d;">I KNEW IT! 🥰</h1>
+        <img id="gif2" class="main-img" src="https://media.tenor.com/On7_5996_SgAAAAAi/mimi-and-neko-cat-couple.gif" onerror="handleError(this)">
+        <div class="heart-backup">😘💋</div>
+        <p>Opening our special memories...</p>
     </div>
 
     <script>
         let yesSize = 1;
 
-        // Function to handle broken images
-        function showBackup(imgElement) {
-            imgElement.style.display = 'none';
-            imgElement.nextElementSibling.style.display = 'block';
+        // Error handler to ensure the page NEVER looks broken
+        function handleError(img) {
+            img.style.display = 'none';
+            img.nextElementSibling.style.display = 'block';
         }
 
         function openMe() {
@@ -86,8 +83,8 @@
             noBtn.style.position = 'fixed';
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100) + 50;
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100) + 50;
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
             yesSize += 0.5;
             yesBtn.style.transform = `scale(${yesSize})`;
         }
@@ -97,7 +94,7 @@
             document.getElementById('kiss-ui').style.display = 'block';
             setTimeout(() => {
                 window.location.href = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?usp=sharing";
-            }, 4000);
+            }, 4500);
         }
     </script>
 </body>
