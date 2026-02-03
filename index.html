@@ -22,11 +22,15 @@
         .buttons { display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 30px; min-height: 120px; position: relative; }
         button { padding: 18px 40px; font-size: 1.4rem; font-weight: bold; cursor: pointer; border: none; border-radius: 60px; z-index: 1000; }
         #yesBtn { background-color: #ff4d6d; color: white; }
-        #noBtn { background-color: #adb5bd; color: white; }
+        #noBtn { background-color: #adb5bd; color: white; transition: 0.1s; }
         
-        .main-img { width: 100%; border-radius: 20px; margin-bottom: 15px; display: block; }
-        .heart-backup { font-size: 80px; display: none; animation: pulse 1s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        /* High-Reliability Image Container */
+        .gif-container { width: 100%; min-height: 200px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }
+        .main-img { width: 100%; border-radius: 20px; display: block; }
+        
+        /* Emergency Heart CSS (Visible if GIF fails) */
+        .fallback-heart { display: none; font-size: 100px; animation: heartbeat 1.2s infinite; }
+        @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -44,9 +48,10 @@
 
     <div id="valentine-ui">
         <h1 style="color: #ff4d6d;">Kayrana, will you be my valentine? ❤️</h1>
-        <img id="gif1" class="main-img" src="https://media.tenor.com/9v6NnIn986AAAAAi/mochi-peach-cat-cute.gif" onerror="handleError(this)">
-        <div class="heart-backup">🥺❤️</div>
-        
+        <div class="gif-container">
+            <img id="gif1" class="main-img" src="https://i.imgur.com/v9TzO6I.gif" onerror="this.style.display='none'; document.getElementById('heart1').style.display='block';">
+            <div id="heart1" class="fallback-heart">❤️</div>
+        </div>
         <div class="buttons">
             <button id="yesBtn" onclick="showKiss()">Yes!</button>
             <button id="noBtn" onmouseover="runAway()" onclick="runAway()">No</button>
@@ -55,19 +60,15 @@
 
     <div id="kiss-ui">
         <h1 style="color: #ff4d6d;">I KNEW IT! 🥰</h1>
-        <img id="gif2" class="main-img" src="https://media.tenor.com/On7_5996_SgAAAAAi/mimi-and-neko-cat-couple.gif" onerror="handleError(this)">
-        <div class="heart-backup">😘💋</div>
+        <div class="gif-container">
+            <img id="gif2" class="main-img" src="https://i.imgur.com/G9LpS97.gif" onerror="this.style.display='none'; document.getElementById('heart2').style.display='block';">
+            <div id="heart2" class="fallback-heart">💋</div>
+        </div>
         <p>Opening our special memories...</p>
     </div>
 
     <script>
         let yesSize = 1;
-
-        // Error handler to ensure the page NEVER looks broken
-        function handleError(img) {
-            img.style.display = 'none';
-            img.nextElementSibling.style.display = 'block';
-        }
 
         function openMe() {
             document.getElementById('envelope').classList.add('open');
