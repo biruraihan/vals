@@ -8,7 +8,7 @@
     <style>
         body { background-color: #f0e6f6; font-family: 'Comic Sans MS', cursive, sans-serif; margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
         
-        /* --- THE BIG ENVELOPE --- */
+        /* --- SUPER SIZED ENVELOPE --- */
         #envelope { position: relative; width: 550px; height: 380px; background-color: #d9534f; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); cursor: pointer; }
         .flap { position: absolute; top: 0; border-left: 275px solid transparent; border-right: 275px solid transparent; border-bottom: 180px solid transparent; border-top: 200px solid #d9534f; transform-origin: top; z-index: 5; transition: transform 0.8s ease; }
         .pocket { position: absolute; top: 0; border-left: 275px solid #f5a3a2; border-right: 275px solid #f5a3a2; border-bottom: 190px solid #ff6f61; border-top: 190px solid transparent; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 4; }
@@ -24,12 +24,8 @@
         #yesBtn { background-color: #ff4d6d; color: white; }
         #noBtn { background-color: #adb5bd; color: white; transition: 0.1s; }
         
-        /* High-Reliability Image Container */
-        .gif-container { width: 100%; min-height: 200px; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }
-        .main-img { width: 100%; border-radius: 20px; display: block; }
-        
-        /* Emergency Heart CSS (Visible if GIF fails) */
-        .fallback-heart { display: none; font-size: 100px; animation: heartbeat 1.2s infinite; }
+        /* Reliable CSS Heart Animation */
+        .big-heart { font-size: 100px; color: #ff4d6d; animation: heartbeat 1.2s infinite; margin: 20px 0; }
         @keyframes heartbeat { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     </style>
 </head>
@@ -48,10 +44,7 @@
 
     <div id="valentine-ui">
         <h1 style="color: #ff4d6d;">Kayrana, will you be my valentine? ❤️</h1>
-        <div class="gif-container">
-            <img id="gif1" class="main-img" src="https://i.imgur.com/v9TzO6I.gif" onerror="this.style.display='none'; document.getElementById('heart1').style.display='block';">
-            <div id="heart1" class="fallback-heart">❤️</div>
-        </div>
+        <div class="big-heart">❤️</div>
         <div class="buttons">
             <button id="yesBtn" onclick="showKiss()">Yes!</button>
             <button id="noBtn" onmouseover="runAway()" onclick="runAway()">No</button>
@@ -60,11 +53,8 @@
 
     <div id="kiss-ui">
         <h1 style="color: #ff4d6d;">I KNEW IT! 🥰</h1>
-        <div class="gif-container">
-            <img id="gif2" class="main-img" src="https://i.imgur.com/G9LpS97.gif" onerror="this.style.display='none'; document.getElementById('heart2').style.display='block';">
-            <div id="heart2" class="fallback-heart">💋</div>
-        </div>
-        <p>Opening our special memories...</p>
+        <div class="big-heart">😘</div>
+        <p style="font-size: 1.2rem; color: #ff4d6d;">I love you! Loading your surprise...</p>
     </div>
 
     <script>
@@ -95,7 +85,7 @@
             document.getElementById('kiss-ui').style.display = 'block';
             setTimeout(() => {
                 window.location.href = "https://docs.google.com/document/d/1CY0hJ2dRUciBvnoe8EeRodH0g0-Edunh_Ih-xmjuHAI/edit?usp=sharing";
-            }, 4500);
+            }, 3000);
         }
     </script>
 </body>
